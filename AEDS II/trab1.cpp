@@ -6,21 +6,25 @@ typedef struct Tveiculo
 {
     string modelo, marca, tipo, comb, camb, dir, cor, placa;
     int ano, km, port;
-    float pot;
+    float pot,valor;
 };
 Tveiculo *busca(Tveiculo *bd[], int tam, string placa)
 {
+    string a;
+    cin >> a;
     for (int i = 0; i < tam; i++)
     {
-        if (bd[i]->placa == placa)
+        if (bd[i]->placa == a)
             return bd[i];
+            bd[i] = NULL;
     }
     return NULL;
 }
 int main(int argc, char **argv)
 {
-    int tam = 0;
-    ifstream myfile("BDVeiculos.txt");
+    string a;
+    int tam = 0, opcao;
+    ifstream myfile("BDVeiculos2.txt");
     Tveiculo *bd[50];
     if (myfile.is_open())
     {
@@ -39,20 +43,27 @@ int main(int argc, char **argv)
             myfile >> bd[tam]->cor;
             myfile >> bd[tam]->port;
             myfile >> bd[tam]->placa;
+            myfile >> bd[tam]->valor;
 
             tam++;
         }
         myfile.close();
 
-        /*Tveiculo *p = busca(bd, tam, "AAC9107");
+        Tveiculo *p = busca(bd, tam,a);
         if (p)
         {
             cout << "Veiculo encontrado" << endl;
-            cout << p->marca << " " << p->modelo << " " << p->ano << " " << endl;
+            cout << p->marca << " " << p->modelo << " " << p->ano << " " << p->km << " " << p->pot << " " << p->comb <<" " << p->camb << " " <<p->dir << " " << p->cor << " " 
+            << p->port<< " " << p->valor << " " <<endl;
         }
         else cout << "Veiculo não encontrado" << endl;
-*/
-        for (int i = 0; i < tam; i++){
+
+        //cout << "Escolha uma opção: "<< endl;
+        //cout << "Incluir veículo (1)" << endl;
+        //cout << "Fazer busca pela placa (2)" << endl;
+        //cout << "Fazer busca dos 10 veículos mais próximos (3)" << endl;
+        //cin >> opcao;
+        /*for (int i = 0; i < tam; i++){
             cout << bd[i]->modelo << " ";
             cout << bd[i]->marca << " ";
             cout << bd[i]->tipo << " ";
@@ -64,9 +75,10 @@ int main(int argc, char **argv)
             cout << bd[i]->dir << " ";
             cout << bd[i]->cor << " ";
             cout << bd[i]->port << " ";
-            cout << bd[i]->placa << endl;
+            cout << bd[i]->placa << " ";
+            cout << bd[i]->valor <<".00" << endl;
         }
-
+*/
         // Apontando os espaços vazios
         for (int i = tam; i < 50; i++)
             bd[i] = NULL;
