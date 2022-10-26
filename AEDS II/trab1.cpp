@@ -6,7 +6,7 @@ typedef struct Tveiculo
 {
     string modelo, marca, tipo, comb, camb, dir, cor, placa;
     int ano, km, port;
-    float pot,valor;
+    float pot, valor;
 };
 Tveiculo *busca(Tveiculo *bd[], int tam, string placa)
 {
@@ -16,13 +16,12 @@ Tveiculo *busca(Tveiculo *bd[], int tam, string placa)
     {
         if (bd[i]->placa == a)
             return bd[i];
-            bd[i] = NULL;
     }
     return NULL;
 }
 int main(int argc, char **argv)
 {
-    string a;
+    string a,remove;
     int tam = 0, opcao;
     ifstream myfile("BDVeiculos2.txt");
     Tveiculo *bd[50];
@@ -48,21 +47,11 @@ int main(int argc, char **argv)
             tam++;
         }
         myfile.close();
-
-        Tveiculo *p = busca(bd, tam,a);
-        if (p)
-        {
-            cout << "Veiculo encontrado" << endl;
-            cout << p->marca << " " << p->modelo << " " << p->ano << " " << p->km << " " << p->pot << " " << p->comb <<" " << p->camb << " " <<p->dir << " " << p->cor << " " 
-            << p->port<< " " << p->valor << " " <<endl;
-        }
-        else cout << "Veiculo não encontrado" << endl;
-
-        //cout << "Escolha uma opção: "<< endl;
-        //cout << "Incluir veículo (1)" << endl;
-        //cout << "Fazer busca pela placa (2)" << endl;
-        //cout << "Fazer busca dos 10 veículos mais próximos (3)" << endl;
-        //cin >> opcao;
+         cout << "Escolha uma opção: "<< endl;
+         cout << "Incluir veículo (1)" << endl;
+         cout << "Fazer busca pela placa (2)" << endl;
+         cout << "Fazer busca dos 10 veículos mais próximos (3)" << endl;
+         cin >> opcao;
         /*for (int i = 0; i < tam; i++){
             cout << bd[i]->modelo << " ";
             cout << bd[i]->marca << " ";
@@ -79,6 +68,20 @@ int main(int argc, char **argv)
             cout << bd[i]->valor <<".00" << endl;
         }
 */
+        if (opcao == 2)
+        {
+            cout << "Informe a placa do veículo: " <<endl;
+            Tveiculo *p = busca(bd, tam, a);
+            if (p)
+            {
+                cout << "Veiculo encontrado" << endl;
+                cout << p->marca << " " << p->modelo << " " << p->tipo << " " << p->ano << " " << p->km << " " << p->pot << " " << p->comb << " " << p->camb << " " << p->dir << " " << p->cor << " "
+                     << p->port << " " << p->placa << " " << p->valor<< endl;
+                cout << "Deseja remover?" << endl;
+            }
+            else
+                cout << "Veiculo não encontrado" << endl;
+        }
         // Apontando os espaços vazios
         for (int i = tam; i < 50; i++)
             bd[i] = NULL;
