@@ -8,6 +8,19 @@ typedef struct Tveiculo
     int ano, km, port;
     float pot, valor;
 };
+
+/*Tveiculo *remove(Tveiculo *bd[], int tam, string placa){
+    int i, j;
+    string a;
+    for (int i = 0; i < tam; i++){
+        if(bd[i]->placa == a){
+            for(j = 1; j < tam-1; j++)
+                bd[j]=bd[j+1];
+            tam--;
+        }
+    }
+}*/
+
 Tveiculo *busca(Tveiculo *bd[], int tam, string placa)
 {
     string a;
@@ -77,7 +90,10 @@ int main(int argc, char **argv)
                 cout << "Veiculo encontrado" << endl;
                 cout << p->marca << " " << p->modelo << " " << p->tipo << " " << p->ano << " " << p->km << " " << p->pot << " " << p->comb << " " << p->camb << " " << p->dir << " " << p->cor << " "
                      << p->port << " " << p->placa << " " << p->valor<< endl;
-                cout << "Deseja remover?" << endl;
+                cout << "Deseja remover?[s/n]" << endl;
+                cin >> remove;
+                
+
             }
             else
                 cout << "Veiculo não encontrado" << endl;
