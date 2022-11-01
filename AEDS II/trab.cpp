@@ -57,54 +57,31 @@ int insere(Tveiculo *bd[], int tam)
     }
     tam = tam + 1;
     bd[tam] = new Tveiculo;
+    cout << "Digite o modelo do automovel: ";
     cin >> bd[tam]->modelo;
+    cout << "Digite a marca do automovel: ";
     cin >> bd[tam]->marca;
+    cout << "Digite o tipo do automovel: ";
     cin >> bd[tam]->tipo;
+    cout << "Digite o ano do automovel: ";
     cin >> bd[tam]->ano;
+    cout << "Digite o km do automovel: ";
     cin >> bd[tam]->km;
+    cout << "Digite a potencia do motor do automovel: ";
     cin >> bd[tam]->pot;
+    cout << "Digite qual o combustivel do automovel: ";
     cin >> bd[tam]->comb;
+    cout << "Digite qual o cambio do automovel: ";
     cin >> bd[tam]->camb;
+    cout << "Digite o tipo de direcao do automovel: ";
     cin >> bd[tam]->dir;
+    cout << "Digite qual a cor do automovel: ";
     cin >> bd[tam]->cor;
+    cout << "Digite qual numero de portas do automovel: ";
     cin >> bd[tam]->port;
     bd[tam]->placa = placa;
+    cout << "Digite qual o valor do automovel: ";
     cin >> bd[tam]->valor;
-    tam++;
-    /*cout << "Digite o modelo do automovel: ";
-    cin >> dados;
-    bd[tam]->modelo = dados;
-    cout << "Digite a marca do automovel: ";
-    cin >> dados;
-    bd[tam]->marca = dados;
-    cout << "Digite o tipo do automovel: ";
-    cin >> dados;
-    bd[tam]->tipo = dados;
-    cout << "Digite o ano do automovel: ";
-    cin >> dados_num;
-    bd[tam]->ano = dados_num;
-    cout << "Digite o km do automovel: ";
-    cin >> dados_num;
-    bd[tam]->km = dados_num;
-    cout << "Digite a potencia do motor do automovel: ";
-    cin >> dados_num;
-    bd[tam]->pot = dados_numF;
-    cout << "Digite qual o cambio do automovel: ";
-    cin >> dados;
-    bd[tam]->camb = dados;
-    cout << "Digite o tipo de direcao do automovel: ";
-    cin >> dados;
-    bd[tam]->dir = dados;
-    cout << "Digite qual a cor do automovel: ";
-    cin >> dados;
-    bd[tam]->cor = dados;
-    cout << "Digite qual numero de portas do automovel: ";
-    cin >> dados_num;
-    bd[tam]->port = dados_num;
-    cout << "Digite qual numero de portas do automovel: ";
-    cin >> dados_num;
-    bd[tam]->valor = dados_numF;
-    */
     return 1;
 }
 
@@ -155,48 +132,38 @@ void *busca_valor(Tveiculo *bd[], int tam, int valor)
     int menor = INT_MAX;
     int menor_index = -1;
 
-    for (int i = 0; i < tam; i++)
+    for (int i = 0; i <= tam; i++)
     {
         fit[i] = abs(bd[i]->valor - valor);
     }
 
-    for (int i = 0; i < tam; i++) {
-        for (int j = 0; j < tam - i; j++){
-            if(fit[j] > fit[j+1]) {
-                aux = fit[j];
-                fit[j] = fit[j+1];
-                fit[j+1] = aux;
-            }
-        }
-    }
-
     for (i = 0; i < 10; i++)
     {
-        
-        for (j = 0; j < tam; j++)
+
+        for (j = 0; j <= tam; j++)
         {
-            if(fit[j] < menor){
+            if (fit[j] < menor)
+            {
                 menor = fit[j];
                 menor_index = j;
             }
         }
         fit[menor_index] = INT_MAX;
-        cout << bd[menor]->modelo << " ";
-        cout << bd[menor]->marca << " ";
-        cout << bd[menor]->tipo << " ";
-        cout << bd[menor]->ano << " ";
-        cout << bd[menor]->km << " ";
-        cout << bd[menor]->pot << " ";
-        cout << bd[menor]->comb << " ";
-        cout << bd[menor]->camb << " ";
-        cout << bd[menor]->dir << " ";
-        cout << bd[menor]->cor << " ";
-        cout << bd[menor]->port << " ";
-        cout << bd[menor]->placa << " ";
-        cout << bd[menor]->valor << ".00" << endl;
-        menor= INT_MAX;
+        cout << bd[menor_index]->modelo << " ";
+        cout << bd[menor_index]->marca << " ";
+        cout << bd[menor_index]->tipo << " ";
+        cout << bd[menor_index]->ano << " ";
+        cout << bd[menor_index]->km << " ";
+        cout << bd[menor_index]->pot << " ";
+        cout << bd[menor_index]->comb << " ";
+        cout << bd[menor_index]->camb << " ";
+        cout << bd[menor_index]->dir << " ";
+        cout << bd[menor_index]->cor << " ";
+        cout << bd[menor_index]->port << " ";
+        cout << bd[menor_index]->placa << " ";
+        cout << bd[menor_index]->valor << ".00" << endl;
+        menor = INT_MAX;
     }
-
 }
 int main(int argc, char **argv)
 {
@@ -232,8 +199,9 @@ int main(int argc, char **argv)
         cout << "Incluir veículo (1)" << endl;
         cout << "Fazer busca pela placa (2)" << endl;
         cout << "Ordenar pela placa (3)" << endl;
-        cout << "Fazer busca dos 10 veículos mais próximos (4)" << endl;
-        cin >> opcao;
+        cout << "Fazer busca por valor (4)" << endl;
+        cout << "Parar (5)" << endl;
+
         /* for (int i = 0; i < tam; i++){
               cout << bd[i]->modelo << " ";
               cout << bd[i]->marca << " ";
@@ -250,46 +218,19 @@ int main(int argc, char **argv)
               cout << bd[i]->valor <<".00" << endl;
           }
   */
-        switch (opcao)
+
+        do
         {
-        case 1:
-            insere(bd, tam);
-            tam++;
-            for (int i = 0; i <= tam; i++)
+            cin >> opcao;
+            switch (opcao)
             {
-                cout << bd[i]->modelo << " ";
-                cout << bd[i]->marca << " ";
-                cout << bd[i]->tipo << " ";
-                cout << bd[i]->ano << " ";
-                cout << bd[i]->km << " ";
-                cout << bd[i]->pot << " ";
-                cout << bd[i]->comb << " ";
-                cout << bd[i]->camb << " ";
-                cout << bd[i]->dir << " ";
-                cout << bd[i]->cor << " ";
-                cout << bd[i]->port << " ";
-                cout << bd[i]->placa << " ";
-                cout << bd[i]->valor << ".00" << endl;
-            }
-            break;
-        case 2:
-        {
-            cout << "Informe a placa do veículo: " << endl;
-            cin >> a;
-            Tveiculo *p = busca(bd, tam, a, &index);
-            cout << index;
-            if (p)
-            {
-                cout << "Veiculo encontrado" << endl;
-                cout << p->marca << " " << p->modelo << " " << p->tipo << " " << p->ano << " " << p->km << " " << p->pot << " " << p->comb << " " << p->camb << " " << p->dir << " " << p->cor << " "
-                     << p->port << " " << p->placa << " " << p->valor << endl;
-                cout << "Deseja remover?" << endl;
-                cin >> removev;
-                if (removev == 's')
-                {
-                    remove(bd, tam, a);
+            case 1:
+                
+                if(insere(bd, tam) == -1){
+                    break;
                 }
-                for (int i = 0; i < tam; i++)
+                tam++;
+                for (int i = 0; i <= tam; i++)
                 {
                     cout << bd[i]->modelo << " ";
                     cout << bd[i]->marca << " ";
@@ -305,22 +246,59 @@ int main(int argc, char **argv)
                     cout << bd[i]->placa << " ";
                     cout << bd[i]->valor << ".00" << endl;
                 }
-                tam--;
+                break;
+            case 2:
+            {
+                cout << "Informe a placa do veículo: " << endl;
+                cin >> a;
+                Tveiculo *p = busca(bd, tam, a, &index);
+                if (p)
+                {
+                    cout << "Veiculo encontrado" << endl;
+                    cout << p->marca << " " << p->modelo << " " << p->tipo << " " << p->ano << " " << p->km << " " << p->pot << " " << p->comb << " " << p->camb << " " << p->dir << " " << p->cor << " "
+                         << p->port << " " << p->placa << " " << p->valor << endl;
+                    cout << "Deseja remover?" << endl;
+                    cin >> removev;
+                    if (removev == 's')
+                    {
+                        remove(bd, tam, a);
+                        tam--;
+                    }
+                    for (int i = 0; i <= tam; i++)
+                    {
+                        cout << bd[i]->modelo << " ";
+                        cout << bd[i]->marca << " ";
+                        cout << bd[i]->tipo << " ";
+                        cout << bd[i]->ano << " ";
+                        cout << bd[i]->km << " ";
+                        cout << bd[i]->pot << " ";
+                        cout << bd[i]->comb << " ";
+                        cout << bd[i]->camb << " ";
+                        cout << bd[i]->dir << " ";
+                        cout << bd[i]->cor << " ";
+                        cout << bd[i]->port << " ";
+                        cout << bd[i]->placa << " ";
+                        cout << bd[i]->valor << ".00" << endl;
+                    }
+                    tam--;
+                }
+                else
+                    cout << "Veiculo não encontrado" << endl;
             }
-            else
-                cout << "Veiculo não encontrado" << endl;
-        }
-        case 3:
-        {
-            Tveiculo *ordenado = ordena(bd, tam);
-        }
-        case 4:
-        {
-            int valor;
-            cin >> valor;
-            busca_valor(bd, tam, valor);
-        }
-        }
+            case 3:
+            {
+                Tveiculo *ordenado = ordena(bd, tam);
+            }
+            case 4:
+            {
+                int valor;
+                cout << "Digite um valor:" << endl;
+                cin >> valor;
+                busca_valor(bd, tam, valor);
+            }
+            }
+        } while (opcao != 5);
+
         // Apontando os espaços vazios
         for (int i = tam; i < 50; i++)
             bd[i] = NULL;
