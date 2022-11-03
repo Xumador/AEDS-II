@@ -10,6 +10,15 @@ typedef struct Tveiculo
     int ano, km, port;
     float pot, valor;
 };
+/**
+ * @brief Faz a busca no banco de dados passando a placa, percorrendo o banco de dados e comparando as placas encontradas com a passada por parametro
+ * 
+ * @param bd banco de dados
+ * @param tam quantidade de carros
+ * @param placa para a busca
+ * @param index ponteiro que retorna o indece do elemento se encontrado
+ * @return Tveiculo* o carro caso encontrado ou null se não
+ */
 Tveiculo *busca(Tveiculo *bd[], int tam, string placa, int *index)
 {
     for (int i = 0; i <= tam; i++)
@@ -22,7 +31,14 @@ Tveiculo *busca(Tveiculo *bd[], int tam, string placa, int *index)
     }
     return NULL;
 }
-
+/**
+ * @brief Faz a remoção de um determinado veiculo passando a placa, utiliza a função de busca para localizar a placa
+ * e partindo do indice do carro faz a troca com o elemento da frente
+ * 
+ * @param bd banco de dados
+ * @param tam quantidade de carros
+ * @param placa que vai ser removida
+ */
 void remove(Tveiculo *bd[], int tam, string placa)
 {
     int index;
@@ -33,7 +49,14 @@ void remove(Tveiculo *bd[], int tam, string placa)
         bd[i] = bd[i + 1];
     }
 }
-
+/**
+ * @brief insere um carro no fim da lista, utiliza a função de busca, caso o carro já esteja no banco de dados e a quantidade 
+ * de carros for inferior a 50, le os dados e insere no fim do banco de dados
+ * 
+ * @param bd banco de dados
+ * @param tam quantidade de carros
+ * @return int 1 no caso de sucesso e -1 se o carro já estiver no banco de dados (placa)
+ */
 int insere(Tveiculo *bd[], int tam)
 {
     string placa, dados;
@@ -83,7 +106,13 @@ int insere(Tveiculo *bd[], int tam)
     cin >> bd[tam]->valor;
     return 1;
 }
-
+/**
+ * @brief Faz a ordenação do banco de dados, utilizando o bubble sort e printa todos os dados
+ * 
+ * @param bd banco de dados
+ * @param tam quantidade de carros
+ * @return Tveiculo* retorna um ponteiro para a lista ordenada 
+ */
 Tveiculo *ordena(Tveiculo *bd[], int tam)
 {
     Tveiculo *aux;
@@ -122,8 +151,15 @@ Tveiculo *ordena(Tveiculo *bd[], int tam)
     }
     return *ord;
 }
-
-void *busca_valor(Tveiculo *bd[], int tam, int valor)
+/**
+ * @brief Faz a busca dos 10 carros com valores mais proximos do valor passado por parametro, o vetor fit contem 
+ * o valor do modulo da diferença do valor buscado com o valor do carro, depois seleciona os 10 menores valores e printa eles
+ * 
+ * @param bd banco de dados
+ * @param tam quantidade de carros
+ * @param valor buscado
+ */
+void busca_valor(Tveiculo *bd[], int tam, int valor)
 {
     int fit[tam];
     int i, j;
@@ -148,6 +184,7 @@ void *busca_valor(Tveiculo *bd[], int tam, int valor)
             }
         }
         fit[menor_index] = INT_MAX;
+        menor = INT_MAX;
         cout << bd[menor_index]->modelo << " ";
         cout << bd[menor_index]->marca << " ";
         cout << bd[menor_index]->tipo << " ";
@@ -161,7 +198,6 @@ void *busca_valor(Tveiculo *bd[], int tam, int valor)
         cout << bd[menor_index]->port << " ";
         cout << bd[menor_index]->placa << " ";
         cout << bd[menor_index]->valor << ".00" << endl;
-        menor = INT_MAX;
     }
 }
 int main(int argc, char **argv)
@@ -268,7 +304,7 @@ int main(int argc, char **argv)
                 }
                 else
                     cout << "Veiculo não encontrado" << endl;
-                    break;
+                break;
             }
             case 3:
             {
@@ -295,21 +331,28 @@ int main(int argc, char **argv)
             }
 
         } while (opcao != 5);
-        for(int i=0;i<tam;i++){
-            myfile >> bd[tam]->modelo;
-            myfile >> bd[tam]->marca;
-            myfile >> bd[tam]->tipo;
-            myfile >> bd[tam]->ano;
-            myfile >> bd[tam]->km;
-            myfile >> bd[tam]->pot;
-            myfile >> bd[tam]->comb;
-            myfile >> bd[tam]->camb;
-            myfile >> bd[tam]->dir;
-            myfile >> bd[tam]->cor;
-            myfile >> bd[tam]->port;
-            myfile >> bd[tam]->placa;
-            myfile >> bd[tam]->valor;
+        ofstream myfile2("BD_veiculos_2.txt");
+        if(myfile2.is_open()){
+            for (int i = 0; i <= tam; i++)
+            {
+                myfile2 << bd[i]->modelo << " ";
+                myfile2 << bd[i]->marca << " ";
+                myfile2 << bd[i]->tipo << " ";
+                myfile2 << bd[i]->ano << " ";
+                myfile2 << bd[i]->km << " ";
+                myfile2 << bd[i]->pot << " ";
+                myfile2 << bd[i]->comb << " ";
+                myfile2 << bd[i]->camb << " ";
+                myfile2 << bd[i]->dir << " ";
+                myfile2 << bd[i]->cor << " ";
+                myfile2 << bd[i]->port << " ";
+                myfile2 << bd[i]->placa << " ";
+                myfile2 << bd[i]->valor;
+                myfile2 << endl;
+            }
         }
+        myfile2.close();
+
 
         // Apontando os espaços vazios
         for (int i = tam; i < 50; i++)
