@@ -28,7 +28,6 @@ void remove(Tveiculo *bd[], int tam, string placa)
     int index;
 
     busca(bd, tam, placa, &index);
-    cout << index;
     for (int i = index; i < tam; i++)
     {
         bd[i] = bd[i + 1];
@@ -170,7 +169,7 @@ int main(int argc, char **argv)
     char removev;
     string a;
     int tam = 0, opcao, index;
-    ifstream myfile("BDVeiculos2.txt");
+    ifstream myfile("BD_veiculos_2.txt");
     Tveiculo *bd[50];
     if (myfile.is_open())
     {
@@ -201,32 +200,15 @@ int main(int argc, char **argv)
         cout << "Ordenar pela placa (3)" << endl;
         cout << "Fazer busca por valor (4)" << endl;
         cout << "Parar (5)" << endl;
-
-        /* for (int i = 0; i < tam; i++){
-              cout << bd[i]->modelo << " ";
-              cout << bd[i]->marca << " ";
-              cout << bd[i]->tipo << " ";
-              cout << bd[i]->ano << " ";
-              cout << bd[i]->km << " ";
-              cout << bd[i]->pot << " ";
-              cout << bd[i]->comb << " ";
-              cout << bd[i]->camb << " ";
-              cout << bd[i]->dir << " ";
-              cout << bd[i]->cor << " ";
-              cout << bd[i]->port << " ";
-              cout << bd[i]->placa << " ";
-              cout << bd[i]->valor <<".00" << endl;
-          }
-  */
-
         do
         {
             cin >> opcao;
             switch (opcao)
             {
             case 1:
-                
-                if(insere(bd, tam) == -1){
+
+                if (insere(bd, tam) == -1)
+                {
                     break;
                 }
                 tam++;
@@ -261,33 +243,37 @@ int main(int argc, char **argv)
                     cin >> removev;
                     if (removev == 's')
                     {
-                        remove(bd, tam, a);
-                        tam--;
+                        if (busca(bd, tam, a, &index))
+                        {
+                            remove(bd, tam, a);
+                            tam--;
+                            for (int i = 0; i <= tam; i++)
+                            {
+                                cout << bd[i]->modelo << " ";
+                                cout << bd[i]->marca << " ";
+                                cout << bd[i]->tipo << " ";
+                                cout << bd[i]->ano << " ";
+                                cout << bd[i]->km << " ";
+                                cout << bd[i]->pot << " ";
+                                cout << bd[i]->comb << " ";
+                                cout << bd[i]->camb << " ";
+                                cout << bd[i]->dir << " ";
+                                cout << bd[i]->cor << " ";
+                                cout << bd[i]->port << " ";
+                                cout << bd[i]->placa << " ";
+                                cout << bd[i]->valor << ".00" << endl;
+                            }
+                        }
                     }
-                    for (int i = 0; i <= tam; i++)
-                    {
-                        cout << bd[i]->modelo << " ";
-                        cout << bd[i]->marca << " ";
-                        cout << bd[i]->tipo << " ";
-                        cout << bd[i]->ano << " ";
-                        cout << bd[i]->km << " ";
-                        cout << bd[i]->pot << " ";
-                        cout << bd[i]->comb << " ";
-                        cout << bd[i]->camb << " ";
-                        cout << bd[i]->dir << " ";
-                        cout << bd[i]->cor << " ";
-                        cout << bd[i]->port << " ";
-                        cout << bd[i]->placa << " ";
-                        cout << bd[i]->valor << ".00" << endl;
-                    }
-                    tam--;
                 }
                 else
                     cout << "Veiculo não encontrado" << endl;
+                    break;
             }
             case 3:
             {
                 Tveiculo *ordenado = ordena(bd, tam);
+                break;
             }
             case 4:
             {
@@ -297,7 +283,33 @@ int main(int argc, char **argv)
                 busca_valor(bd, tam, valor);
             }
             }
+            if (opcao != 5)
+            {
+                cout << endl;
+                cout << "Escolha uma opção: " << endl;
+                cout << "Incluir veículo (1)" << endl;
+                cout << "Fazer busca pela placa (2)" << endl;
+                cout << "Ordenar pela placa (3)" << endl;
+                cout << "Fazer busca por valor (4)" << endl;
+                cout << "Parar (5)" << endl;
+            }
+
         } while (opcao != 5);
+        for(int i=0;i<tam;i++){
+            myfile >> bd[tam]->modelo;
+            myfile >> bd[tam]->marca;
+            myfile >> bd[tam]->tipo;
+            myfile >> bd[tam]->ano;
+            myfile >> bd[tam]->km;
+            myfile >> bd[tam]->pot;
+            myfile >> bd[tam]->comb;
+            myfile >> bd[tam]->camb;
+            myfile >> bd[tam]->dir;
+            myfile >> bd[tam]->cor;
+            myfile >> bd[tam]->port;
+            myfile >> bd[tam]->placa;
+            myfile >> bd[tam]->valor;
+        }
 
         // Apontando os espaços vazios
         for (int i = tam; i < 50; i++)
